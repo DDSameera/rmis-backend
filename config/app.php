@@ -134,6 +134,8 @@ return [
     |
     */
 
+    'api_rate_limit'=> env('API_RATE_LIMIT',60),
+
     'providers' => [
 
         /*
@@ -174,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\RepositoriesServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
 
     ],
 
