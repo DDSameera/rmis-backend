@@ -1,9 +1,9 @@
 # API Document
 
-#Server
+# Server
 ``http://127.0.0.1:8000``
 
-#1. POST - User Registeration
+# 1. POST - User Registeration
 Path : ``/api/v1/user/register``
 
 Accept Headers : ``application/json``
@@ -59,7 +59,7 @@ Response : ``JSON``  Status : ``201`` Description : ``Created``
 ```
 ___
 
-#2. POST - User Login
+# 2. POST - User Login
 
 Path : ``/api/v1/user/login``
 
@@ -97,7 +97,7 @@ Response : ``JSON``  Status : ``200`` Description : ``OK``
 }
 ```
 ___
-#3. POST - Create Applicant
+# 3. POST - Create Applicant
 
 
 Path : ``api/v1/applicant/``
@@ -139,7 +139,7 @@ Response : ``JSON``  Status : ``201`` Description : ``CREATED``
 ```
 
 ___
-#4. PUT or PATCH - Update Applicant
+# 4. PUT or PATCH - Update Applicant
 
 
 Path : ``api/v1/applicant/{user_id}``
@@ -183,7 +183,7 @@ Response : ``JSON``  Status : ``200`` Description : ``OK``
 }
 ```
 ___
-#5. GET - Show Applicant
+# 5. GET - Show Applicant
 
 
 Path : ``/api/v1/applicant/{user_id}``
@@ -216,7 +216,7 @@ http://127.0.0.1:8000/api/v1/applicant/1
 ```
 ___
 
-#6. GET - List of All Applicants
+# 6. GET - List of All Applicants
 
 Path : ``api/v1/applicant{?page=1}``
 
@@ -309,7 +309,7 @@ Examples:
 ```
 
 ___
-#7. DELETE - Delete Applicant
+# 7. DELETE - Delete Applicant
 
 
 Path : ``/api/v1/applicant/{user_id}``
