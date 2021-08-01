@@ -61,17 +61,18 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 </ul>
 
 ### 3. Final Setup
+
 i). Go to Visual Studio Code > Menu > Terminal > New Terminal
    
 ii) .Run these Artisan Codes
 
-    - `php artisan key:generate`
-    - `php artisan migrate:fresh --seed`
-    - `php artisan optimize`
-    - `php artisan config:cache`
-    - `php artisan config:clear`
+    - php artisan key:generate
+    - php artisan migrate:fresh --seed
+    - php artisan optimize
+    - php artisan config:cache
+    - php artisan config:clear
 
 ### 4. Completed
-    - Run `php artisan serve`
-    - Type this address on Postman Client ``http://127.0.0.1:8000/``
+- Run Command `php artisan serve`
+- Type this address on Postman Client ``http://127.0.0.1:8000/``
 
