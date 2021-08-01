@@ -20,9 +20,9 @@ RMIS stands for Recruitment Management Information System - Please follow up the
     - `C:\wamp64\bin\mysql\mysql8.0.21\bin`
     - `C:\PhpUnitTest\vendor\bin`
 
-##2.0 Getting Start
+## 2.0 Getting Start
 
-1. ### Clone Project
+### 1. Clone Project
     1) Open Windows Command Prompt 
     2) Go to WAMP Folder <code> cd  C:/wamp64/www </code>
     3) Run this Command to clone project
@@ -32,7 +32,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
     6) Open this project in Visual Studio Code Editor 
     
           
-2. ### Preparation 
+ ### 2. Preparation 
     1) Rename <code>.env.example</code> to <code>.env</code>
     2) Create MYSQL database  ``rmis-backend``
     3) Configure **MYSQL Data Base**
@@ -60,7 +60,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 <li>API_TOKEN_EXPIRE - Authorized Token will expire after 15 min</li>
 </ul>
 
-3. ### Final Setup
+### 3. Final Setup
     i). Go to Visual Studio Code > Menu > Terminal > New Terminal
    
    ii) .Run these Artisan Codes
@@ -71,7 +71,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
     - `php artisan config:cache`
     - `php artisan config:clear`
 
-4. ### Completed
+### 4. Completed
     - Run `php artisan serve`
     - Type this address on Postman Client ``http://127.0.0.1:8000/``
 
