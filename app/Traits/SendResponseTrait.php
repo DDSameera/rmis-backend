@@ -4,6 +4,8 @@
 namespace App\Traits;
 
 
+
+
 trait SendResponseTrait
 {
     public static function sendSuccessWithToken($result, $message,$status_code)
@@ -11,16 +13,19 @@ trait SendResponseTrait
 
         $response = [
             'success' => true,
-            'data' => $result,
             'message' => $message
         ];
+
+        if ($result) {
+            $response['data'] = $result;
+        }
 
         return response()->json($response, $status_code);
 
 
     }
 
-    public static function sendErrorWithToken($errors, $message,$status_code)
+    public static function sendError($errors, $message,$status_code)
     {
 
         $response = [
@@ -30,7 +35,7 @@ trait SendResponseTrait
         ];
 
 
-        return response()->json($response, $status_code);
+        return response()->json($response,$status_code);
 
     }
 }

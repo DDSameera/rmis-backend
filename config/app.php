@@ -136,6 +136,9 @@ return [
 
     'api_rate_limit'=> env('API_RATE_LIMIT',60),
 
+    'api_max_login_attempts'=> env('API_MAX_LOGIN_ATTEMPTS',10),
+    'api_max_login_delay'=>env('API_MAX_LOGIN_DELAY',1),
+
     'providers' => [
 
         /*

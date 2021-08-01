@@ -12,7 +12,7 @@ class UserRepository implements UserRepositoryInterface
 {
 
     /**
-     * @var UserModel
+     * @var User
      */
     protected $user;
 
@@ -20,7 +20,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * UserRepository constructor.
      *
-     * @param UserModel
+     * @param User
      */
 
     public function __construct(User $user)
@@ -31,7 +31,7 @@ class UserRepository implements UserRepositoryInterface
     /**
      * @param array $userAttributes
      *
-     * @return UserModel
+     * @return User
      */
 
     public function createUser(Object $data): User
@@ -43,7 +43,8 @@ class UserRepository implements UserRepositoryInterface
             'mname' => $data->mname,
             'email' => $data->email,
             'mobile' => $data->mobile,
-            'password' => Hash::make($data->password)
+            'password' => Hash::make($data->password),
+            'role' => $data->role
         ]);
 
 

@@ -2,30 +2,31 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Traits\Privilege;
 use App\Traits\SendResponseTrait;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Exception;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Http\Response;
+
 
 class AuthController extends Controller
 {
 
-
-    use SendResponseTrait;
+    use SendResponseTrait, Privilege;
 
     private $userRepository;
 
     /**
      * UserRepositoryInterface constructor.
-     * @param $userRepository
+     * @param UserRepositoryInterface $userRepository
      */
 
     public function __construct(UserRepositoryInterface $userRepository)
@@ -44,45 +45,44 @@ class AuthController extends Controller
         //Store Validated User Inputs
         $user = $this->userRepository->createUser($formData);
 
-        try {
-
-            if ($user) {
-                //Encrypted Token Generate
-                $token = Crypt::encrypt($user->createToken('rmisbackend')->plainTextToken);
-
-                //Send Response with Formatted User Data
-                $response = [
-                    'token' => $token,
-                    'user' => new UserResource($user)
-                ];
-
-                return SendResponseTrait::sendSuccessWithToken($response, "User Created Successfully", 200);
-            }
-        } catch (ModelNotFoundException $modelNotFoundException) {
-            Log::error($modelNotFoundException->getMessage(), $modelNotFoundException->getTrace());
-            return SendResponseTrait::sendErrorWithToken('Unable to Save Record. Please Contact System Admin (Error No: 001 )', "Error", 404);
-
-        } catch (Exception $exception) {
-            Log::error($exception->getMessage(), $exception->getTrace());
-            return SendResponseTrait::sendErrorWithToken('Sorry.Something went wrong. Please Contact System Admin (Error No: 002 )', "Error", 404);
-
+        //If User Create Unsuccess
+        if (!$user) {
+            return SendResponseTrait::sendError('Something goes wrong,please try again later', "Error", Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+        //Send Response with Formatted User Data
+        $response = [
+            'user' => new UserResource($user)
+        ];
+
+        return SendResponseTrait::sendSuccessWithToken($response, "User Created Successfully", Response::HTTP_CREATED);
 
     }
 
     public function login(LoginRequest $loginRequest)
     {
 
+        //Authentication
+        $isAuthenticatedUser = Auth::attempt(['email' => $loginRequest->input('email'), 'password' => $loginRequest->input('password')]);
+
+        if (!$isAuthenticatedUser) {
+            return SendResponseTrait::sendError('Invalid Email or Password', "Error", Response::HTTP_UNAUTHORIZED);
+
+        }
+
         //Check Valid User
         $user = User::where('email', $loginRequest->input('email'))->first();
 
-        //Check Valid User & Password
-        if (!$user || !Hash::check($loginRequest->input('password'), $user->password)) {
-            return SendResponseTrait::sendErrorWithToken('Invalid email or password', "Error", 401);
-        }
+        //Privileges Setup
+        $privileges = $this->getPrivileges($user);
 
-        //Valid
-        $token = Crypt::encrypt($user->createToken('rmisbackend')->plainTextToken);
+
+        //Delete User's Existing Tokens
+        $user->tokens()->delete();
+
+        //Issue New Token
+        $token = $user->createToken(Auth::user()->email, $privileges)->plainTextToken;
+
 
         //Send Response with Formatted User Data
         $response = [
@@ -90,7 +90,19 @@ class AuthController extends Controller
             'user' => new UserResource($user)
         ];
 
-        return SendResponseTrait::sendSuccessWithToken($response, "User Logged Successfully", 200);
+        return SendResponseTrait::sendSuccessWithToken($response, "User Logged Successfully", Response::HTTP_OK);
 
+    }
+
+    public function logout()
+    {
+        //Get Current Logged User
+        $user = Auth::user();
+
+        //Delete All Tokens
+        $user->tokens()->delete();
+
+
+        return SendResponseTrait::sendSuccessWithToken(null, "User Logged Out Successfully", Response::HTTP_OK);
     }
 }

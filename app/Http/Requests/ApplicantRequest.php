@@ -1,18 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Auth;
+namespace App\Http\Requests;
 
 use App\Traits\SendResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Http\Response;
 
-
-class RegisterRequest extends FormRequest
+class ApplicantRequest extends FormRequest
 {
-    use SendResponseTrait;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,13 +27,9 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'fname' => 'required|string',
-            'mname' => 'required|string',
-            'lname' => 'required|string',
-            'email' => 'required|string|unique:users|email',
-            'mobile' => 'required|string',
-            'password' => 'required|string|confirmed',
-            'role' => 'required|in:admin,user'
+            'onboarding_percentage' => 'required|numeric',
+            'count_applications' => 'required|numeric',
+            'count_accepted_applications' => 'required|numeric',
         ];
     }
 
@@ -45,7 +37,7 @@ class RegisterRequest extends FormRequest
     {
 
         throw new HttpResponseException(
-            SendResponseTrait::sendError($validator->errors()->all(), "Validation Errors", Response::HTTP_UNPROCESSABLE_ENTITY)
+            SendResponseTrait::sendError($validator->errors()->all(), "Validation Errors", 422)
         );
     }
 }

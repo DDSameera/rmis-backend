@@ -2,7 +2,16 @@
 
 namespace App\Exceptions;
 
+
+use App\Traits\SendResponseTrait;
+
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Http\Response;
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -13,7 +22,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+
     ];
 
     /**
@@ -35,30 +44,45 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            parent::report($e);
+            //
         });
     }
 
 
-
-
-
-
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
-
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
-        if ($request->expectsJson()) {
-            return $this->apiException($request, $exception);
+
+
+        //Too Many Login Attempts
+        if ($e instanceof ThrottleRequestsException) {
+            return MaxLoginAttemptsException::render();
         }
 
-        return parent::render($request, $exception);
+        //Query Exception,Duplicate Entry
+        if ($e instanceof QueryException) {
+            return CustomQueryException::render($e);
+        }
+
+        //Model Not Found Exception
+        if ($e instanceof ModelNotFoundException) {
+            return SendResponseTrait::sendError('Page or Record Not Found. ', "Error", Response::HTTP_NOT_FOUND);
+
+        }
+
+        //Token Mismatch Exception
+        if ($e instanceof TokenMismatchException) {
+            return SendResponseTrait::sendError('Token is mismatch', "Error", 500);
+
+        }
+
+        //Not Found Http Exception
+        if ($e instanceof NotFoundHttpException) {
+            return SendResponseTrait::sendError('Invalid Url', "Error", 404);
+
+        }
+
+
+        return parent::render($request, $e);
     }
 
 

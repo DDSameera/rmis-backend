@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'mobile',
         'password',
+        'role'
     ];
 
     /**
@@ -43,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
 
     ];
+
+
+    public function applicant(){
+        return $this->hasOne(Applicant::class);
+    }
 }

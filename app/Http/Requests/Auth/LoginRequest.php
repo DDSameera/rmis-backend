@@ -36,7 +36,7 @@ class LoginRequest extends FormRequest
     {
 
         throw new HttpResponseException(
-            SendResponseTrait::sendErrorWithToken($validator->errors()->all(), "Validation Errors", 422)
+            SendResponseTrait::sendError($validator->errors()->all(), "Validation Errors", 422)
         );
     }
 }
