@@ -61,9 +61,9 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 </ul>
 
 ### 3. Final Setup
-    i). Go to Visual Studio Code > Menu > Terminal > New Terminal
+i). Go to Visual Studio Code > Menu > Terminal > New Terminal
    
-   ii) .Run these Artisan Codes
+ii) .Run these Artisan Codes
 
     - `php artisan key:generate`
     - `php artisan migrate:fresh --seed`
