@@ -2,7 +2,7 @@
 
 RMIS stands for Recruitment Management Information System - Please follow up these steps  for testing in a fresh environment
 
-#1.0 PreRequests
+## 1.0 PreRequests
 - ****PHP 8.0,MySQL 8.0,Apache 2.4****
 - WAMP Server Latest ([Download](https://www.wampserver.com/en/))
   or XAMPP Server Latest
@@ -13,14 +13,14 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 - PHP Unit Test ([Installation Guide](https://perials.com/installing-phpunit-windows/))
 - Visual Studio Code  -  [Download](https://code.visualstudio.com/) 
 
-###### Set Up Windows Environment Path Variable
+### Set Up Windows Environment Path Variable
 - Go to Start > Type "Edit Environment Variable for your account"
 - Add Following Paths 
     - `C:\wamp64\bin\php\php7.4.9`
     - `C:\wamp64\bin\mysql\mysql8.0.21\bin`
     - `C:\PhpUnitTest\vendor\bin`
 
-#2.0 Getting Start
+##2.0 Getting Start
 
 1. ### Clone Project
     1) Open Windows Command Prompt 
