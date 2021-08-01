@@ -21,7 +21,7 @@ Request Body : ``JSON``
 7. password -  Min 6 Characters,Password should contain alphabetic characters,numbers,& symbol (_required_) -
 8. password_confirmation  - (_required_) (Confirm your password)
 
-   
+
 **Example:**
 ```
     http://127.0.0.1:8000/api/v1/user/register   
@@ -226,9 +226,9 @@ Request Parameter : ``?page=1``
 
 Response : ``JSON``  Status : ``200`` Description : ``OK``
 
-Paginated Results : 
+Paginated Results :
 
-Examples: 
+Examples:
 ```
     http://127.0.0.1:8000/api/v1/applicant/
     http://127.0.0.1:8000/api/v1/applicant?page=2
