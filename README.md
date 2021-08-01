@@ -23,41 +23,39 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 ## 2.0 Getting Start
 
 ### 1. Clone Project
-    1) Open Windows Command Prompt 
-    2) Go to WAMP Folder <code> cd  C:/wamp64/www </code>
-    3) Run this Command to clone project
-       `git clone https://github.com/DDSameera/rmis-backend.git` 
-    4) Run this command & Go to Project Folder `cd rmis-backend`
-    5) Run this command to Install Dependencies `composer install'
-    6) Open this project in Visual Studio Code Editor 
+1) Open Windows Command Prompt 
+2) Go to WAMP Folder <code> cd  C:/wamp64/www </code>
+3) Run this Command to clone project
+   `git clone https://github.com/DDSameera/rmis-backend.git` 
+4) Run this command & Go to Project Folder `cd rmis-backend`
+5) Run this command to Install Dependencies `composer install'
+6) Open this project in Visual Studio Code Editor 
     
           
- ### 2. Preparation 
+### 2. Preparation 
 1) Rename <code>.env.example</code> to <code>.env</code>
 2) Create MYSQL database  ``rmis-backend``
 3) Configure **MYSQL Data Base**
-      
-       ```
+            
        DB_HOST=127.0.0.1
        DB_PORT=3306
        DB_DATABASE=rmis-backend
        DB_USERNAME=xxxxxxx
        DB_PASSWORD=xxxxxxx
-       ```
+       
      
 3). Customize API Settings (Recommend : Keep Default Settings)
-
-      ```
+      
         API_RATE_LIMIT=100
         API_MAX_LOGIN_ATTEMPTS=10
         API_MAX_LOGIN_DELAY=1
         API_TOKEN_EXPIRE=15
-      ```
+      
 <ul>
-<li>**API_RATE_LIMIT** - Maximum Number of API Request Send to Server</li>
-<li>**API_MAX_LOGIN_ATTEMPTS** - Maximum Login Attempts
-<li>**API_MAX_LOGIN_DELAY** - If Maximum Login attempts reached, then wait 1 min</li>
-<li>**API_TOKEN_EXPIRE** - Authorized Token will expire after 15 min</li>
+<li>API_RATE_LIMIT- Maximum Number of API Request Send to Server</li>
+<li>API_MAX_LOGIN_ATTEMPTS- Maximum Login Attempts
+<li>API_MAX_LOGIN_DELAY- If Maximum Login attempts reached, then wait 1 min</li>
+<li>API_TOKEN_EXPIRE- Authorized Token will expire after 15 min</li>
 </ul>
 
 ### 3. Final Setup
