@@ -9,8 +9,7 @@ class Applicant extends Model
 {
     use HasFactory;
 
-    /*Primary key*/
-    protected $primaryKey = 'user_id';
+
 
     /* * Default Time Stamp Disable */
     public $timestamps = false;

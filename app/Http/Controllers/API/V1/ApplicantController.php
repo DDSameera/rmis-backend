@@ -81,7 +81,7 @@ class ApplicantController extends Controller
         $response = [
             'user' => new ApplicantResource($applicant)
         ];
-        return SendResponseTrait::sendSuccessWithToken($response, "Applicant Information has been saved successfully ", Response::HTTP_OK);
+        return SendResponseTrait::sendSuccessWithToken($response, "Applicant Information has been saved successfully ", Response::HTTP_CREATED);
 
     }
 
@@ -91,12 +91,11 @@ class ApplicantController extends Controller
      * @param $user_id
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show($user_id): JsonResponse
     {
 
-
         //Paginated Data
-        $applicant = $this->applicantRepository->find($id);
+        $applicant = $this->applicantRepository->find($user_id);
 
         //  Send Response with Formatted User Data
         $response = [

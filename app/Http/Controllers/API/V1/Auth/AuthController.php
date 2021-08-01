@@ -18,6 +18,7 @@ use Illuminate\Http\Response;
 
 
 class AuthController extends Controller
+
 {
 
     use SendResponseTrait, Privilege;
@@ -35,7 +36,7 @@ class AuthController extends Controller
 
     }
 
-    /**/
+
 
     public function register(RegisterRequest $registerRequest)
     {

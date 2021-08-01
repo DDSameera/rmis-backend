@@ -50,6 +50,7 @@ class ApplicantRepository implements ApplicantRepositoryInterface
 
     public function create(object $applicant): Applicant
     {
+
         return $this->applicant->create([
             'user_id' => $applicant->user_id,
             'onboarding_percentage' => $applicant->onboarding_percentage,
@@ -85,9 +86,9 @@ class ApplicantRepository implements ApplicantRepositoryInterface
      * @return Applicant
      */
 
-    public function find($id): Applicant
+    public function find($user_id): Applicant
     {
-        return $this->applicant->findorFail($id);
+        return $this->applicant->where('user_id',"=",$user_id)->firstorFail();
     }
 
 
