@@ -15,13 +15,18 @@
     - Encrypted Password in secure manner  
 - Code Repository Management - Github
 
+____
+
 # SKIP POINTS
 - Unit Testing  (Reason : Limited Time,But I  Completed Feature Testing)
 
+___
 
 # HOW TO RUN FEATURE TESTING ?
 - Run `php artisan test` command
 - Refer test Cases `/tests/Feature folder`
+
+___
 
 # USED TOOLS
 - PHPStorm IDE
