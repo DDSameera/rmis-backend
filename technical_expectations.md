@@ -16,13 +16,12 @@
 - Code Repository Management - Github
 
 # SKIP POINTS
-- Unit Testing  (Reason : Limited Time,But I  Complete Feature Testing)
-
+- Unit Testing  (Reason : Limited Time,But I  Completed Feature Testing)
 
 
 # HOW TO RUN FEATURE TESTING ?
-- Run this command `php artisan test`
-- Refer `/tests/Feature folder`
+- Run `php artisan test` command
+- Refer test Cases `/tests/Feature folder`
 
 # USED TOOLS
 - PHPStorm IDE
