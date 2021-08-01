@@ -7,17 +7,37 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## RMIS - Backend
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+RMIS stands for Recruitment Management Information System - Please follow up these steps  for testing in a fresh environment
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#PreRequests
+- ****PHP 8.0,MySQL 8.0,Apache 2.4****
+- WAMP Server Latest ([Download](https://www.wampserver.com/en/))
+  or XAMPP Server Latest
+- MySQL Workbench Latest ([Download](https://dev.mysql.com/downloads/workbench/)) or Phpmyadmin 5.0
+- Postman Latest ([Download](https://www.postman.com/downloads/))
+- GIT Installation in your local environment ([How to intsall GIT in windows](https://phoenixnap.com/kb/how-to-install-git-windows))
+
+
+#Getting Start
+1. Copy <code>.env.example</code> file and paste it and rename it as <code>.env</code>
+
+2. Create Folder in your WAMP Eg:  <code> C:/wamp64/www </code>
+
+3. Clone Project
+    1) Open Windows Command Prompt
+    2) Clone Project - <code>git clone https://github.com/DDSameera/rmis-backend.git </code>
+    3) 
+   
+
+3. Run these Artisan Codes
+    - <code>php artisan key:generate</code>
+    - <code>php artisan migrate:fresh --seed</code>
+    - <code>php artisan optimize</code>
+    - <code>php artisan config:cache</code>
+    - <code>php artisan config:clear</code>
+
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 

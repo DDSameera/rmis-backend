@@ -5,6 +5,7 @@ namespace App\Exceptions;
 
 use App\Traits\SendResponseTrait;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -12,6 +13,7 @@ use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -78,6 +80,18 @@ class Handler extends ExceptionHandler
         //Not Found Http Exception
         if ($e instanceof NotFoundHttpException) {
             return SendResponseTrait::sendError('Invalid Url', "Error", 404);
+
+        }
+
+        //Route Not Found
+        if ($e instanceof RouteNotFoundException) {
+            return SendResponseTrait::sendError('Invalid Route', "Error", 404);
+
+        }
+
+        //Authentication
+        if ($e instanceof AuthenticationException) {
+            return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
 
         }
 
