@@ -1,6 +1,6 @@
 # API Document
 
-# Server
+### Server IP (localhost)
 ``http://127.0.0.1:8000``
 
 # 1. POST - User Registeration
