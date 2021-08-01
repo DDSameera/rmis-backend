@@ -33,9 +33,9 @@ RMIS stands for Recruitment Management Information System - Please follow up the
     
           
  ### 2. Preparation 
-    1) Rename <code>.env.example</code> to <code>.env</code>
-    2) Create MYSQL database  ``rmis-backend``
-    3) Configure **MYSQL Data Base**
+1) Rename <code>.env.example</code> to <code>.env</code>
+2) Create MYSQL database  ``rmis-backend``
+3) Configure **MYSQL Data Base**
       
        ```
        DB_HOST=127.0.0.1
@@ -45,7 +45,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
        DB_PASSWORD=xxxxxxx
        ```
      
-    3). Customize API Settings (Recommend : Keep Default Settings)
+3). Customize API Settings (Recommend : Keep Default Settings)
 
       ```
         API_RATE_LIMIT=100
@@ -54,15 +54,15 @@ RMIS stands for Recruitment Management Information System - Please follow up the
         API_TOKEN_EXPIRE=15
       ```
 <ul>
-<li>API_RATE_LIMIT - Maximum Number of API Request Send to Server</li>
-<li>API_MAX_LOGIN_ATTEMPTS - Maximum Login Attempts
-<li>API_MAX_LOGIN_DELAY - If Maximum Login attempts reached, then wait 1 min</li>
-<li>API_TOKEN_EXPIRE - Authorized Token will expire after 15 min</li>
+<li>**API_RATE_LIMIT** - Maximum Number of API Request Send to Server</li>
+<li>**API_MAX_LOGIN_ATTEMPTS** - Maximum Login Attempts
+<li>**API_MAX_LOGIN_DELAY** - If Maximum Login attempts reached, then wait 1 min</li>
+<li>**API_TOKEN_EXPIRE** - Authorized Token will expire after 15 min</li>
 </ul>
 
 ### 3. Final Setup
 
-i). Go to Visual Studio Code > Menu > Terminal > New Terminal
+i). Go to `Visual Studio Code > Menu > Terminal > New Terminal`
    
 ii) .Run these Artisan Codes
 
