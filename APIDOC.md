@@ -91,10 +91,10 @@ Response : ``JSON``  Status : ``200`` Description : ``OK``
     "success": true,
     "message": "User Logged Successfully",
     "data": {
-        "token": "19|uwKEzVq4v7uvYFGfptv5z0J0ZLkGSCRqcOsUtaV8",
+        "token": "1|UZGkwXq7zfjQJFvn8okIIwm5xjvuFJ4U1mf49Pal",
         "user": {
             "full_name": "Sameera Dananjaya Wijerathna",
-            "email": "digix.sameera@gmail.com",
+            "email": "digix.sameera@yahoo.com",
             "mobile": "0718761292",
             "role": "admin"
         }
