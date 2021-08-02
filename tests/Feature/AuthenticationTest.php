@@ -11,6 +11,10 @@ class AuthenticationTest extends TestCase
 
     use RefreshDatabase;
 
+    /**
+     * Setup
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -20,7 +24,12 @@ class AuthenticationTest extends TestCase
         $this->withoutExceptionHandling();
     }
 
-    public function test_required_fields_for_registeration()
+    /**
+     * Test Required Fields for Regisreration
+     * @return void
+     */
+
+    public function test_required_fields_for_registeration(): void
     {
         $this->json('POST', 'http://127.0.0.1:8000/api/v1/user/register')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
@@ -41,7 +50,12 @@ class AuthenticationTest extends TestCase
             ]);
     }
 
-    public function test_successful_registeration()
+    /**
+     * Test Success Registeration
+     * @return void
+     */
+
+    public function test_successful_registeration(): void
     {
 
         $userData = [
@@ -70,8 +84,11 @@ class AuthenticationTest extends TestCase
 
     }
 
-
-    public function test_password_confirmation()
+    /**
+     * Test Password Confirmation
+     * @return void
+     */
+    public function test_password_confirmation(): void
     {
         $userData = [
             'fname' => 'Sameera',

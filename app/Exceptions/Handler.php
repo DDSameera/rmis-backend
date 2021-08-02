@@ -12,6 +12,8 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Psy\Exception\TypeErrorException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
@@ -39,26 +41,28 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    /**
-     * Register the exception handling callbacks for the application.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
-    }
 
+    public function report(Throwable $e)
+    {
+
+        //General Log
+        Log::channel('exception')->error($e, ['user' => Auth::user()]);
+
+
+    }
 
     public function render($request, Throwable $e)
     {
 
         if (!config('app.debug')) {
+
             if ($e instanceof ThrottleRequestsException) {
+                //Report to Critical Log
+                Log::channel('critical')->critical($e, ['user' => Auth::user()]);
+
                 //Too Many Login Attempts
                 return MaxLoginAttemptsException::render();
+
             } else if ($e instanceof QueryException) {
                 //Query Exception,Duplicate Entry
                 return CustomQueryException::render($e);
@@ -82,14 +86,9 @@ class Handler extends ExceptionHandler
                 //Authentication
                 return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
 
-            } else if ($e instanceof TypeErrorException) {
-                //Type Error
-                return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
-
             } else {
                 //Any Exception
                 return SendResponseTrait::sendError('We are doing Some Maintenance . Please try again later. ', "Error", 404);
-
 
             }
         } else {

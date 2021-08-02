@@ -42,6 +42,13 @@ ___
 
 ___
 
+#Debugging,Loggins
+___
+There are 02 Types of Loggers 
+  1. Critical Log
+  2. Exception Log
+  3. User Activity Log
+
 # USED TOOLS
 - WAMP Stack
 - PHPStorm IDE
