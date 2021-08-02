@@ -14,7 +14,6 @@ use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Psy\Exception\TypeErrorException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
@@ -66,6 +65,7 @@ class Handler extends ExceptionHandler
             } else if ($e instanceof QueryException) {
                 //Query Exception,Duplicate Entry
                 return CustomQueryException::render($e);
+
             } else if ($e instanceof ModelNotFoundException) {
                 //Model Not Found Exception
                 return SendResponseTrait::sendError('Page or Record Not Found. ', "Error", Response::HTTP_NOT_FOUND);

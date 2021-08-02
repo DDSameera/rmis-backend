@@ -93,8 +93,11 @@ class ApplicantController extends Controller
     public function show($user_id): JsonResponse
     {
 
-        //Paginated Data
-        $applicant = $this->applicantRepository->find($user_id);
+        //Show Data
+
+        $applicant = Applicant::with('user')->where('user_id',$user_id)->firstOrFail();
+
+
 
         //  Send Response with Formatted User Data
         $response = [

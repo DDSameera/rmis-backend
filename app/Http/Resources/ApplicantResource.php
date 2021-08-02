@@ -15,8 +15,14 @@ class ApplicantResource extends JsonResource
 
     public function toArray($request)
     {
+
         return [
-            'user_id'=>$this->user_id,
+            'user' => [
+                'id' => $this->user->id,
+                'full_name' => $this->user->fname.' '.$this->user->mname.' '.$this->user->lname,
+
+            ],
+
             'onboarding_percentage' => $this->onboarding_percentage,
             'count_applications' => $this->count_applications,
             'count_accepted_applications' => $this->count_accepted_applications
