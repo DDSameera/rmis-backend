@@ -30,15 +30,14 @@ Request Body : ``JSON``
 
 ```
 {
-"fname"                 :   "Sameera",
-"mname"                 :   "Dananjaya",
-"lname"                 :   "Wijerathna",
-"mobile"                :   "0718761292",
-"email"                 :   "digix.sameera@gmail.com",
-"role"                  :   "admin",
-"password"              :   "Majority600!",
-"password_confirmation" :   "Majority600!",
-
+"fname" : "Sameera",
+"mname" : "Dananjaya",
+"lname" : "Wijerathna",
+"mobile" : "0718761292",
+"email":"digix.sameera@yahoo.com",
+"role":"admin",
+"password" : "Majority600!",
+"password_confirmation" :  "Majorityroo1d"
 }
 ```
 

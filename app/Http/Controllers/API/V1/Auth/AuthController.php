@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\Privilege;
 use App\Traits\SendResponseTrait;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Response;
@@ -22,7 +24,7 @@ class AuthController extends Controller
 
     use SendResponseTrait, Privilege;
 
-    private $userRepository;
+    private UserRepositoryInterface $userRepository;
 
     /**
      * UserRepositoryInterface constructor.
@@ -35,9 +37,14 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Register New User (Roles : Admin,User)
+     *
+     * @param RegisterRequest $registerRequest
+     * @return JsonResponse
+     */
 
-
-    public function register(RegisterRequest $registerRequest)
+    public function register(RegisterRequest $registerRequest): JsonResponse
     {
         //Capture User Inputs
         $formData = (object)$registerRequest->all();
@@ -59,7 +66,14 @@ class AuthController extends Controller
 
     }
 
-    public function login(LoginRequest $loginRequest)
+    /**
+     * Login User (Roles : Admin,User)
+     *
+     * @param LoginRequest $loginRequest
+     * @return JsonResponse
+     */
+
+    public function login(LoginRequest $loginRequest): JsonResponse
     {
 
         //Authentication
@@ -77,11 +91,7 @@ class AuthController extends Controller
         $privileges = $this->getPrivileges($user);
 
 
-        //Delete User's Existing Tokens
-        $user->tokens()->delete();
-
         //Issue New Token based up on device name
-
         $token = $user->createToken($loginRequest->input('deviceName'), $privileges)->plainTextToken;
 
 
@@ -95,7 +105,15 @@ class AuthController extends Controller
 
     }
 
-    public function logout()
+    /**
+     * Logout User (Roles : Admin,User)
+     * Delete All User Related Tokens
+     *
+     *
+     * @return JsonResponse
+     */
+
+    public function logout(): JsonResponse
     {
         //Get Current Logged User
         $user = Auth::user();
