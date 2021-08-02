@@ -89,9 +89,6 @@ class ApplicantRepository implements ApplicantRepositoryInterface
 
     public function find($user_id)
     {
-
-
-
        return $this->applicant->where('user_id',"=",$user_id)->firstorFail();
     }
 

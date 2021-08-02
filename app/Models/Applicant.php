@@ -13,7 +13,7 @@ class Applicant extends Model
 
     protected $primaryKey = 'user_id';
 
-
+    public $incrementing = false;
 
     /* * Default Time Stamp Disable */
     public $timestamps = false;

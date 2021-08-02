@@ -78,7 +78,7 @@ class ApplicantController extends Controller
 
         //Send Response with Formatted User Data
         $response = [
-            'user' => new ApplicantResource($applicant)
+            new ApplicantResource($applicant)
         ];
         return SendResponseTrait::sendSuccessWithToken($response, "Applicant Information has been saved successfully ", Response::HTTP_CREATED);
 

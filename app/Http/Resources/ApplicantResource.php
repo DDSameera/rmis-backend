@@ -16,7 +16,7 @@ class ApplicantResource extends JsonResource
     public function toArray($request)
     {
 
-        if (isset($this->user)){
+
             return [
                 'user' => [
                     'id' => $this->user->id,
@@ -28,15 +28,7 @@ class ApplicantResource extends JsonResource
                 'count_applications' => $this->count_applications,
                 'count_accepted_applications' => $this->count_accepted_applications
             ];
-        }else{
 
-            return [
-
-                'onboarding_percentage' => $this->onboarding_percentage,
-                'count_applications' => $this->count_applications,
-                'count_accepted_applications' => $this->count_accepted_applications
-            ];
-        }
 
     }
 }
