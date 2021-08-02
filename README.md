@@ -27,8 +27,8 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 2) Go to WAMP Folder <code> cd  C:/wamp64/www </code>
 3) Run this Command to clone project
    `git clone https://github.com/DDSameera/rmis-backend.git` 
-4) Run this command & Go to Project Folder `cd rmis-backend`
-5) Run this command to Install Dependencies `composer install'
+4) Run this command `cd rmis-backend`
+5) Run this command & Install Dependencies `composer install'
 6) Open this project in Visual Studio Code Editor 
     
           
@@ -64,13 +64,12 @@ i). Go to `Visual Studio Code > Menu > Terminal > New Terminal`
    
 ii) .Run these Artisan Codes
 
-    - php artisan key:generate
-    - php artisan migrate:fresh --seed
-    - php artisan optimize
-    - php artisan config:cache
-    - php artisan config:clear
+    php artisan key:generate
+    php artisan migrate:fresh --seed
+    php artisan optimize
+    php artisan config:cache
+    php artisan config:clear
 
 ### 4. Completed
 - Run Command `php artisan serve`
 - Type this address on Postman Client ``http://127.0.0.1:8000/``
-
