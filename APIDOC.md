@@ -77,10 +77,11 @@ Description:
 3. deviceName  - (Options: mobile,desktop) (_required_)
 ```
 {
-    "email" : "digix.sameera@gmail.com",
+    "email" : "digix.sameera@yahoo.com",
     "password": "Majority600!",
     "deviceName" : "desktop"
 }
+
 ```
 
 Response : ``JSON``  Status : ``200`` Description : ``OK``
