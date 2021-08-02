@@ -9,7 +9,6 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 
 
-
 class RegisterRequest extends FormRequest
 {
     use SendResponseTrait;
@@ -45,8 +44,8 @@ class RegisterRequest extends FormRequest
     public function messages()
     {
         return [
-            'password.regex'=>'Password should contain alphabetic characters,numbers,& symbol',
-            'deviceName.required'=> 'Please choose your device name . Options: [desktop,mobile]'
+            'password.regex' => 'Password should contain alphabetic characters,numbers,& symbol',
+            'deviceName.required' => 'Please choose your device name . Options: [desktop,mobile]'
         ];
     }
 

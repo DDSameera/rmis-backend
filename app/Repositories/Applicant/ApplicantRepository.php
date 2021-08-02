@@ -7,6 +7,7 @@ namespace App\Repositories\Applicant;
 use App\Models\Applicant;
 
 
+
 class ApplicantRepository implements ApplicantRepositoryInterface
 {
 
@@ -86,9 +87,12 @@ class ApplicantRepository implements ApplicantRepositoryInterface
      * @return Applicant
      */
 
-    public function find($user_id): Applicant
+    public function find($user_id)
     {
-        return $this->applicant->where('user_id',"=",$user_id)->firstorFail();
+
+
+
+       return $this->applicant->where('user_id',"=",$user_id)->firstorFail();
     }
 
 

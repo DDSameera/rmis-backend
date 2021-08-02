@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Applicant extends Model
 {
     use HasFactory;
+
+    //protected $primaryKey = 'user_id';
 
 
 
@@ -26,8 +29,12 @@ class Applicant extends Model
         'count_accepted_applications',
     ];
 
-
-    public function user()
+    /**
+     * User Reationshop
+     *
+     * @return HasOne
+     */
+    public function user(): HasOne
     {
         return $this->hasOne(Applicant::class);
     }

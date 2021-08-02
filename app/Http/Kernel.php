@@ -9,7 +9,6 @@ use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\UserActivityLog;
 use Fruitcake\Cors\HandleCors;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
@@ -54,7 +53,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             'token.ability',
             SubstituteBindings::class,
-            UserActivityLog::class
+
 
 
         ],

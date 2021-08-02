@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\API\V1\Auth;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\LoginRequest;
@@ -11,11 +10,10 @@ use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\Privilege;
 use App\Traits\SendResponseTrait;
-use Illuminate\Auth\Events\Login;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Response;
+
 
 
 class AuthController extends Controller
@@ -45,12 +43,16 @@ class AuthController extends Controller
      */
 
     public function register(RegisterRequest $registerRequest): JsonResponse
+
     {
+
         //Capture User Inputs
         $formData = (object)$registerRequest->all();
 
+
         //Store Validated User Inputs
         $user = $this->userRepository->createUser($formData);
+
 
         //If User Create Unsuccess
         if (!$user) {

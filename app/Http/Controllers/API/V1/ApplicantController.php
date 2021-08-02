@@ -72,7 +72,6 @@ class ApplicantController extends Controller
         //Convert Form Input to Object
         $formData = (object)$formData;
 
-
         //Store Validated User Inputs
         $applicant = $this->applicantRepository->create($formData);
 
