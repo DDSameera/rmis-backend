@@ -69,7 +69,7 @@ Request Body : ``JSON``
 
 Example:
 ```
-    http://127.0.0.1:8000/api/v1/user/login
+http://127.0.0.1:8000/api/v1/user/login
 ```
 Description:
 1. email : User Registered Email Address (_required_)
@@ -234,11 +234,11 @@ Paginated Results :
 
 Examples:
 ```
-    http://127.0.0.1:8000/api/v1/applicant/
-    http://127.0.0.1:8000/api/v1/applicant?page=2
-    http://127.0.0.1:8000/api/v1/applicant?page=3
-    http://127.0.0.1:8000/api/v1/applicant?page=4
-    http://127.0.0.1:8000/api/v1/applicant?page=5
+http://127.0.0.1:8000/api/v1/applicant/
+http://127.0.0.1:8000/api/v1/applicant?page=2
+http://127.0.0.1:8000/api/v1/applicant?page=3
+http://127.0.0.1:8000/api/v1/applicant?page=4
+http://127.0.0.1:8000/api/v1/applicant?page=5
 ```
 
 ```
