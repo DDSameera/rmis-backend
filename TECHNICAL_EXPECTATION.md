@@ -16,10 +16,11 @@
 - Used 3rd Party API Authentication Package
     - Package Name : Sanctum
 - Security Enhancements
-    - CreatedRole based Permissions
+    - Created Role based Permissions
     - Secured Tokenizing Method
-    - Define Maximum API Limit Usage 
-    - Too Many Login Attempts Control (Throttle)
+    - Defined Maximum API Limit Usage 
+    - Laravel Too Many Login Attempts: Restrict and Customize
+    - Provided API Handling option via on .env file  
     - Force to create strong password for user registration
     - Encrypted Password in secure manner
     - Sanctum Auth Protected Routes
