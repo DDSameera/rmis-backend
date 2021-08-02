@@ -45,9 +45,9 @@ ___
 #Debugging,Loggins
 ___
 There are 02 Types of Loggers 
-  1. Critical Log
-  2. Exception Log
-  3. User Activity Log
+  1. **Critical Log** - Too Many Login Attempts save in here.
+  2. **Exception Log** -  System Exceptions saved in this log.It helps to debug System issues
+  3. **User Activity Log** - All REST API requests saved in here
 
 # USED TOOLS
 - WAMP Stack
