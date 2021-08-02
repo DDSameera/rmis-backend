@@ -12,6 +12,7 @@ use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
+use Psy\Exception\TypeErrorException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Throwable;
@@ -54,50 +55,48 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
 
+        if (!config('app.debug')) {
+            if ($e instanceof ThrottleRequestsException) {
+                //Too Many Login Attempts
+                return MaxLoginAttemptsException::render();
+            } else if ($e instanceof QueryException) {
+                //Query Exception,Duplicate Entry
+                return CustomQueryException::render($e);
+            } else if ($e instanceof ModelNotFoundException) {
+                //Model Not Found Exception
+                return SendResponseTrait::sendError('Page or Record Not Found. ', "Error", Response::HTTP_NOT_FOUND);
 
-        //Too Many Login Attempts
-        if ($e instanceof ThrottleRequestsException) {
-            return MaxLoginAttemptsException::render();
+            } else if ($e instanceof TokenMismatchException) {
+                //Token Mismatch Exception
+                return SendResponseTrait::sendError('Token is mismatch', "Error", 500);
+
+            } else if ($e instanceof NotFoundHttpException) {
+                //Not Found Http Exception
+                return SendResponseTrait::sendError('Invalid Url', "Error", 404);
+
+            } else if ($e instanceof RouteNotFoundException) {
+                //Route Not Found
+                return SendResponseTrait::sendError('Invalid Route', "Error", 404);
+
+            } else if ($e instanceof AuthenticationException) {
+                //Authentication
+                return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
+
+            } else if ($e instanceof TypeErrorException) {
+                //Type Error
+                return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
+
+            } else {
+                //Any Exception
+                return SendResponseTrait::sendError('We are doing Some Maintenance . Please try again later. ', "Error", 404);
+
+
+            }
+        } else {
+            return parent::render($request, $e);
         }
-
-        //Query Exception,Duplicate Entry
-        if ($e instanceof QueryException) {
-            return CustomQueryException::render($e);
-        }
-
-        //Model Not Found Exception
-        if ($e instanceof ModelNotFoundException) {
-            return SendResponseTrait::sendError('Page or Record Not Found. ', "Error", Response::HTTP_NOT_FOUND);
-
-        }
-
-        //Token Mismatch Exception
-        if ($e instanceof TokenMismatchException) {
-            return SendResponseTrait::sendError('Token is mismatch', "Error", 500);
-
-        }
-
-        //Not Found Http Exception
-        if ($e instanceof NotFoundHttpException) {
-            return SendResponseTrait::sendError('Invalid Url', "Error", 404);
-
-        }
-
-        //Route Not Found
-        if ($e instanceof RouteNotFoundException) {
-            return SendResponseTrait::sendError('Invalid Route', "Error", 404);
-
-        }
-
-        //Authentication
-        if ($e instanceof AuthenticationException) {
-            return SendResponseTrait::sendError('Token Expired.Please Login again', "Error", 404);
-
-        }
-
-
-        return parent::render($request, $e);
     }
 
 
 }
+

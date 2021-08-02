@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
-use Illuminate\Validation\Rules\Password;
+
 
 
 class RegisterRequest extends FormRequest
@@ -38,14 +38,15 @@ class RegisterRequest extends FormRequest
             'email' => 'required|string|unique:users|email',
             'mobile' => 'required|string',
             'password' => 'required|string|confirmed|min:6|regex:/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/',
-            'role' => 'required|in:admin,user'
+            'role' => 'required|in:admin,user',
         ];
     }
 
     public function messages()
     {
-        return[
-            'password.regex'=>'Password should contain alphabetic characters,numbers,& symbol'
+        return [
+            'password.regex'=>'Password should contain alphabetic characters,numbers,& symbol',
+            'deviceName.required'=> 'Please choose your device name . Options: [desktop,mobile]'
         ];
     }
 

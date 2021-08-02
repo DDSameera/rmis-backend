@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
 use App\Traits\Privilege;
 use App\Traits\SendResponseTrait;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Response;
@@ -81,8 +80,9 @@ class AuthController extends Controller
         //Delete User's Existing Tokens
         $user->tokens()->delete();
 
-        //Issue New Token
-        $token = $user->createToken(Auth::user()->email, $privileges)->plainTextToken;
+        //Issue New Token based up on device name
+
+        $token = $user->createToken($loginRequest->input('deviceName'), $privileges)->plainTextToken;
 
 
         //Send Response with Formatted User Data

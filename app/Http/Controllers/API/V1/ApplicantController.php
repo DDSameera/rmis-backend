@@ -114,15 +114,19 @@ class ApplicantController extends Controller
      * @param $user_id
      * @return JsonResponse
      */
-    public function update(ApplicantRequest $applicantRequest, $id): JsonResponse
+    public function update(ApplicantRequest $applicantRequest, $user_id): JsonResponse
     {
 
         //Capture User Inputs
         $formData = (object)$applicantRequest->all();
 
 
+        //Check User Exsiting
+        $this->applicantRepository->find($user_id);
+
+
         //Store Validated User Inputs
-        $applicant = $this->applicantRepository->update($formData, $id);
+        $applicant = $this->applicantRepository->update($formData, $user_id);
 
         if ($applicant == 0) {
             return SendResponseTrait::sendError('Applicant data already updated.', "Error", Response::HTTP_OK);
@@ -130,7 +134,7 @@ class ApplicantController extends Controller
 
         //  Send Response with Formatted User Data
         $response = [
-            'updated_data' => new ApplicantResource(Applicant::where('user_id', $id)->first())
+            'updated_data' => new ApplicantResource(Applicant::where('user_id', $user_id)->first())
         ];
 
         return SendResponseTrait::sendSuccessWithToken($response, "Applicant Information has been updated successfully ", Response::HTTP_OK);

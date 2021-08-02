@@ -16,11 +16,11 @@ interface ApplicantRepositoryInterface
 
     public function create(object $applicant);
 
-    public function update(object $applicant, $id);
+    public function update(object $applicant, $user_id);
 
-    public function find($id);
+    public function find($user_id);
 
-    public function destroy($id);
+    public function destroy($user_id);
 
 
 }

@@ -62,16 +62,16 @@ class ApplicantRepository implements ApplicantRepositoryInterface
 
     /**
      * @param Object $applicant
-     * @param $id
+     * @param $user_id
      *
      * @return integer
      */
 
 
-    public function update(object $applicant, $id): int
+    public function update(object $applicant, $user_id): int
     {
 
-        return $this->applicant->where("user_id",$id)->update([
+        return $this->applicant->where("user_id", $user_id)->update([
             'onboarding_percentage' => $applicant->onboarding_percentage,
             'count_applications' => $applicant->count_applications,
             'count_accepted_applications' => $applicant->count_accepted_applications,

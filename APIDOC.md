@@ -37,7 +37,8 @@ Request Body : ``JSON``
 "email"                 :   "digix.sameera@gmail.com",
 "role"                  :   "admin",
 "password"              :   "Majority600!",
-"password_confirmation" :   "Majority600!"
+"password_confirmation" :   "Majority600!",
+
 }
 ```
 
@@ -71,11 +72,15 @@ Example:
 ```
     http://127.0.0.1:8000/api/v1/user/login
 ```
-
+Description:
+1. email : User Registered Email Address (_required_)
+2. password : Min 6 , Registered Password (_required_)
+3. deviceName  - (Options: mobile,desktop) (_required_)
 ```
 {
     "email" : "digix.sameera@gmail.com",
-    "password": "Majority600!"
+    "password": "Majority600!",
+    "deviceName" : "desktop"
 }
 ```
 
