@@ -21,7 +21,7 @@
     - Defined Maximum API Limit Usage 
     - Laravel Too Many Login Attempts: Restrict and Customize
     - Provided API Handling option via on .env file  
-    - Force to create strong password for user registration
+    - Forced to create strong password for user registration
     - Encrypted Password in secure manner
     - Sanctum Auth Protected Routes
 - Uploaded Code Repository Management - Github
@@ -43,6 +43,7 @@ ___
 ___
 
 # USED TOOLS
+- WAMP Stack
 - PHPStorm IDE
 - MYSQL Work Bench
 - POSTMAN
