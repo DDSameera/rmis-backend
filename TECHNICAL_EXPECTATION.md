@@ -42,7 +42,7 @@ ___
 
 ___
 
-#Debugging,Loggins
+# Debugging,Loggins
 ___
 There are 02 Types of Loggers 
   1. **Critical Log** - Too Many Login Attempts save in here.
