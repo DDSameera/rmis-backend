@@ -6,6 +6,7 @@ use App\Traits\SendResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicantRequest extends FormRequest
 {
@@ -16,7 +17,11 @@ class ApplicantRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        if (Auth::user()->id){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**

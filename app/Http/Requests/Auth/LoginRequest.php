@@ -6,6 +6,7 @@ use App\Traits\SendResponseTrait;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class LoginRequest extends FormRequest
 {
@@ -16,7 +17,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+       return true;
     }
 
     /**
