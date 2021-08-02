@@ -37,7 +37,7 @@ Request Body : ``JSON``
 "email":"digix.sameera@yahoo.com",
 "role":"admin",
 "password" : "Majority600!",
-"password_confirmation" :  "Majorityroo1d"
+"password_confirmation" :  "Majority600!"
 }
 ```
 
