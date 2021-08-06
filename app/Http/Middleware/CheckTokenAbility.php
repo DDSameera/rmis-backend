@@ -28,7 +28,8 @@ class CheckTokenAbility
         $excludeRoutes = [
             'user.login',
             'user.register',
-            'user.logout'
+            'user.logout',
+
         ];
 
         if (in_array($routeName, $excludeRoutes)) {
@@ -36,31 +37,12 @@ class CheckTokenAbility
         }
 
         //Admin Privileges
+
         if (Auth::user()->role === "admin") {
             switch ($routeName) {
 
-                case 'applicant.index' :
-                    if (Auth::user()->tokenCan('applicant-index'))
-                        return $next($request);
-                    break;
-
-                case 'applicant.store' :
-                    if (Auth::user()->tokenCan('applicant-store'))
-                        return $next($request);
-                    break;
-
-                case 'applicant.update' :
-                    if (Auth::user()->tokenCan('applicant-update'))
-                        return $next($request);
-                    break;
-
-                case 'applicant.show' :
-                    if (Auth::user()->tokenCan('applicant-show'))
-                        return $next($request);
-                    break;
-
-                case 'applicant.destroy' :
-                    if (Auth::user()->tokenCan('applicant-destroy'))
+                case 'generate.chart' :
+                    if (Auth::user()->tokenCan('generate-chart'))
                         return $next($request);
                     break;
 

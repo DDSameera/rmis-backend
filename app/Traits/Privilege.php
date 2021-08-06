@@ -14,11 +14,7 @@ trait Privilege
 
         if ($user->role === "admin") {
             $this->privileges = [
-                'applicant-index',
-                'applicant-store',
-                'applicant-update',
-                'applicant-show',
-                'applicant-destroy',
+                'generate-chart',
             ];
         } else if ($user->role === "user") {
             $this->privileges = [

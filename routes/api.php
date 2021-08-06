@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\API\V1\Auth\AuthController;
-use \App\Http\Controllers\API\V1\ApplicantController;
+use \App\Http\Controllers\API\V1\OnboardProcessController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -10,21 +10,35 @@ use \App\Http\Controllers\API\V1\ApplicantController;
 
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::get('/',function(){
+    return "permission denied";
+});
 
 Route::group(['prefix' => 'v1'], function () {
 
     /*User*/
-    Route::group(['prefix' => 'user', 'middleware' => ['throttle:five_max_login_attempt_per_min']], function () {
+    Route::group(['prefix' => 'user'], function () {
+
+        /*Register*/
         Route::post('register', [AuthController::class, 'register'])->name('user.register');
+
+        /*login*/
         Route::post('login', [AuthController::class, 'login'])->name('user.login');
-        Route::middleware(['auth:sanctum'])->post('logout', [AuthController::class, 'logout'])->name('user.logout');
+
+        /*Logout*/
+        Route::group(['middleware' => 'auth:sanctum'], function () {
+            Route::post('logout', [AuthController::class, 'logout'])->name('user.logout');
+        });
+
+
     });
 
 
-    /*Applicant*/
-    Route::middleware(['auth:sanctum', 'token.ability'])->apiResource('applicant', ApplicantController::class);
+    /*ExcelFile*/
+    Route::group(['prefix'=>'generate','middleware' => 'auth:sanctum'], function () {
+        Route::post('chart', [OnboardProcessController::class, 'getChart'])->name('generate.chart');
+
+    });
+
 
 });
