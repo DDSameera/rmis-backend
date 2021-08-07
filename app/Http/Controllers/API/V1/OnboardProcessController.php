@@ -6,13 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ExcelFileRequest;
 use App\Repositories\OnboardProcess\OnboardProcessInterface;
 use App\Traits\SendResponseTrait;
-use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
-use JetBrains\PhpStorm\NoReturn;
 use Maatwebsite\Excel\Facades\Excel;
-use function React\Promise\all;
+
 
 class OnboardProcessController extends Controller
 {
@@ -27,50 +23,29 @@ class OnboardProcessController extends Controller
     public function getChart(ExcelFileRequest $excelFileRequest)
     {
 
-        //Capture Excel Data
+        //Store Excel Sheet
         $excelFile = $excelFileRequest->file('excel_file');
-        $excelFileName = 'export.csv';
-        Storage::disk('local')->putFileAs('/excel', $excelFile, $excelFileName);
-
+        $this->onboardProcess->storeSheet($excelFile);
 
         //Capture Data From Excel
         $filePath = storage_path('app/excel/export.csv');
-        $userData = Excel::toArray([], $filePath);
-        $userDataArr = [];
-
-        foreach ($userData[0] as $key => $ud) {
+        $excelSheetData = Excel::toArray([], $filePath)[0];
 
 
-            if ($key != 0) {
+        //Format Raw Excel Data
+        $formattedExcelSheetDataArr = $this->onboardProcess->getFormattedExcelData($excelSheetData);
 
-                $id = $ud[0];
+        //Generate Stats based up on week days
+        $data = $this->onboardProcess->divideByWeek($formattedExcelSheetDataArr);
 
-                $createdAt = $ud[1];
-                $percentage = $ud[2];
+        //Calculate Percentage of Steps
+        $data = $this->onboardProcess->findStepsPercentage($formattedExcelSheetDataArr);
 
-                $userDataArr[$key] = [
-                    'id' => $id,
-                    'createdAt' => $createdAt,
-                    'percentage' => $percentage
-                ];
-            }
-        }
-
-
-        $data = $this->onboardProcess->divideByWeek($userDataArr);
-        $data = $this->onboardProcess->findStepsPercentage($data);
-
-
-        $result = [];
-        for ($i = 0; $i < count($data); $i++) {
-            $result[$i]['name'] = ($i + 1) . " weeks later";
-            $result[$i]['data'] = $data[$i];
-        }
+        //Get JSON Chart Stats
+        $result = $this->onboardProcess->getChartCodes($formattedExcelSheetDataArr);
 
         //  Send Response with Formatted User Data
-        $response = $result;
-
-        return SendResponseTrait::sendSuccessWithToken($response, "Chart Data", Response::HTTP_CREATED);
+        return SendResponseTrait::sendSuccessWithToken($result, "Highchart Data", Response::HTTP_OK);
 
 
     }

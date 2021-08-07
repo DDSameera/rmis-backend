@@ -36,6 +36,6 @@ class ValidateCSVFile implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'Please upload only  excel sheet (.csv)';
     }
 }

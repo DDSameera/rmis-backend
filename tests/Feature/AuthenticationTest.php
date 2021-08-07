@@ -31,7 +31,7 @@ class AuthenticationTest extends TestCase
 
     public function test_required_fields_for_registeration(): void
     {
-        $this->json('POST', 'http://127.0.0.1:8000/api/v1/user/register')
+        $this->json('POST', 'api/v1/user/register')
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 "success" => false,
@@ -69,7 +69,7 @@ class AuthenticationTest extends TestCase
             'role' => 'admin'
         ];
 
-        $this->json('POST', 'http://127.0.0.1:8000/api/v1/user/register', $userData, ['Accept' => 'application/json'])
+        $this->json('POST', 'api/v1/user/register', $userData, ['Accept' => 'application/json'])
             ->assertStatus(Response::HTTP_CREATED)
             ->assertJsonStructure(
                 [
@@ -101,7 +101,7 @@ class AuthenticationTest extends TestCase
             'role' => 'admin'
         ];
 
-        $this->json('POST', 'http://127.0.0.1:8000/api/v1/user/register', $userData, ['Accept' => 'application/json'])
+        $this->json('POST', 'api/v1/user/register', $userData, ['Accept' => 'application/json'])
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson(
                 [
@@ -116,6 +116,8 @@ class AuthenticationTest extends TestCase
             );
 
     }
+
+
 
 
 
