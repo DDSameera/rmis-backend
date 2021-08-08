@@ -43,10 +43,11 @@ class OnboardProcessTest extends TestCase
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 "success" => false,
+                "message" => "Validation Errors",
                 "errors" => [
                     "The excel file field is required."
                 ],
-                "message" => "Validation Errors"
+
             ]);
 
 
@@ -70,10 +71,11 @@ class OnboardProcessTest extends TestCase
             ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY)
             ->assertJson([
                 "success" => false,
+                "message" => "Validation Errors",
                 "errors" => [
-                    "Please upload only  excel sheet (.csv)"
+                    "Invalid File Format. Allow Only .csv format"
                 ],
-                "message" => "Validation Errors"
+
             ]);
 
 
