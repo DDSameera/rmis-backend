@@ -30,8 +30,9 @@ trait SendResponseTrait
 
         $response = [
             'success' => false,
+            'message' => $message,
             'errors' => $errors,
-            'message' => $message
+
         ];
 
 
