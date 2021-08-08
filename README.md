@@ -2,7 +2,7 @@
 
 RMIS stands for Recruitment Management Information System - Please follow up these steps  for testing in a fresh environment
 
-## 1.0 PreRequests
+### 1.0 PreRequests
 - ****PHP 8.0,MySQL 8.0,Apache 2.4****
 - WAMP Server Latest ([Download](https://www.wampserver.com/en/))
   or XAMPP Server Latest

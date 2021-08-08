@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use File;
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class Install extends Command
 {
@@ -40,6 +41,9 @@ class Install extends Command
     public function handle()
     {
 
+        //Welcome
+        $this->info('******** Welcome to the RMIS Command line Installation Wizard ********');
+
         //1.Optimize
         $this->optimize();
 
@@ -59,36 +63,86 @@ class Install extends Command
         //6. APP Key Generate
         $this->appKeyGenerate();
 
-        //7.Optimize
+
+        //7.Run Composer Commands
+        $this->runComposerCommands();
+
+        //8.DB Migration & Seed
+        $this->runDBMigration();
+
+        //9.Optimize
         $this->optimize();
 
-        return 1;
+        //10.Run Server
+        $this->runServer();
 
     }
 
-    public function cloneEnvFile()
+    public function runComposerCommands(): bool
     {
+        $this->info('******** Composer Commands *******');
+
+        shell_exec('composer install');
+        return true;
+    }
+
+    public function runServer(): bool
+    {
+        $this->info('******** Completed. Server is running *******');
+
+        $output = new ConsoleOutput;
+        $serverIp = config('app.url');
+
+        $output->writeln("RMIS Backend API server started: Please COPY this Address & Paste it on Postman or Insomnia <$serverIp>");
+
+        Artisan::call('serve');
+        Artisan::output();
+
+        return true;
+    }
+
+    public function runDBMigration(): bool
+    {
+        Artisan::call('migrate:fresh', ['--seed' => true]);
+        echo Artisan::output();
+
+        return true;
+
+    }
+
+    public function cloneEnvFile(): bool
+    {
+        $this->info('******** ENV File Clone Process *******');
+
+
         if (!file_exists(base_path('.env'))) {
             File::copy(base_path('.env.example'), base_path('.env'));
             $this->optimize();
+            return true;
         }
+
+        return false;
     }
 
 
-    public function setupAppEnvironment()
+    public function setupAppEnvironment(): bool
     {
+        $this->info('******** App Environment *******');
+
         $environmentInput = $this->choice(
             'Choose your Application environment?',
             ['production', 'local'],
             'local'
         );
 
-        return $this->modifyEnvFile('APP_ENV=' . env('APP_ENV'), 'APP_ENV=' . $environmentInput);
-
+        $this->modifyEnvFile('API_ENV=' . env('API_ENV'), 'API_ENV=' . $environmentInput);
+        return true;
     }
 
     public function setupAPIConfig()
     {
+        $this->info('******** API Settings *******');
+
         if ($this->confirm('Do you wish to Change Default API Settings ?  ', false)) {
             $this->info('******** API Configuration ********');
 
@@ -117,10 +171,13 @@ class Install extends Command
             $this->modifyEnvFile('API_TOKEN_EXPIRE=' . env('API_TOKEN_EXPIRE'), 'API_TOKEN_EXPIRE=' . $apiTokenExpire);
 
         }
+
+        return true;
     }
 
-    public function setupDBConfig()
+    public function setupDBConfig(): bool
     {
+
         //Setup DB Configuration
         $this->info('******** DB Configuration ********');
 
@@ -140,10 +197,11 @@ class Install extends Command
             $this->modifyEnvFile('DB_PASSWORD=' . env('DB_PASSWORD'), 'DB_PASSWORD=' . $dbPassword);
 
         }
+        return true;
     }
 
 
-    public function modifyEnvFile($searchStr, $replaceStr)
+    public function modifyEnvFile($searchStr, $replaceStr): bool
     {
 
         $path = base_path('.env');
@@ -152,25 +210,46 @@ class Install extends Command
             $replace = file_put_contents($path, str_replace(
                 $searchStr, $replaceStr, file_get_contents($path)
             ));
-            return $replace;
+            if (!$replace) {
+                return false;
+            }
 
         }
 
-        return 0;
+        return true;
     }
 
-    public function optimize()
+    public function optimize(): bool
     {
+        $this->info('******** Optimization Process *******');
+
         Artisan::call('config:cache');
+        echo Artisan::output();
+
         Artisan::call('config:clear');
+        echo Artisan::output();
+
         Artisan::call('optimize');
+        echo Artisan::output();
+
         Artisan::call('route:clear');
+        echo Artisan::output();
+
         Artisan::call('route:cache');
+        echo Artisan::output();
+
+        return true;
 
     }
 
-    public function appKeyGenerate()
+    public function appKeyGenerate(): bool
     {
+        $this->info('******** Secure App Key Generated *******');
+
+
         Artisan::call('key:generate', ['--force' => true]);
+        echo Artisan::output();
+
+        return true;
     }
 }
