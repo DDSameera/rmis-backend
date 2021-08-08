@@ -45,42 +45,51 @@ class Install extends Command
         $this->info('******** Welcome to the RMIS Command line Installation Wizard ********');
 
         //1.Optimize
+        $this->info('******** Optimization Process [1/10] *******');
         $this->optimize();
 
         //2. Clone ENV File
+        $this->info('******** ENV File Cloned  [2/10] *******');
         $this->cloneEnvFile();
 
-        //3. Setup DB CConfig
+        //3. Setup DB Config
+        $this->info('******** DB Configuration [3/10] ********');
         $this->setupDBConfig();
 
         //4. Setup API Config
+        $this->info('******** API Settings [4/10] ********');
         $this->setupAPIConfig();
 
         //5. Setup Environment
+        $this->info('******** App Environment [5/10] *******');
         $this->setupAppEnvironment();
 
 
         //6. APP Key Generate
+        $this->info('******** Secure App Key Generated [6/10]*******');
         $this->appKeyGenerate();
 
 
         //7.Run Composer Commands
+        $this->info('******** Composer Command Run [7/10]*******');
         $this->runComposerCommands();
 
         //8.DB Migration & Seed
+        $this->info('******** DB Migration & Seed Run [8/10]*******');
         $this->runDBMigration();
 
         //9.Optimize
+        $this->info('******** Optimization Process [9/10] *******');
         $this->optimize();
 
         //10.Run Server
+        $this->info('******** All Process Completed [10/10] .Server is running *******');
         $this->runServer();
 
     }
 
     public function runComposerCommands(): bool
     {
-        $this->info('******** Composer Commands *******');
 
         shell_exec('composer install');
         return true;
@@ -88,7 +97,6 @@ class Install extends Command
 
     public function runServer(): bool
     {
-        $this->info('******** Completed. Server is running *******');
 
         $output = new ConsoleOutput;
         $serverIp = config('app.url');
@@ -112,7 +120,6 @@ class Install extends Command
 
     public function cloneEnvFile(): bool
     {
-        $this->info('******** ENV File Clone Process *******');
 
 
         if (!file_exists(base_path('.env'))) {
@@ -127,8 +134,6 @@ class Install extends Command
 
     public function setupAppEnvironment(): bool
     {
-        $this->info('******** App Environment *******');
-
         $environmentInput = $this->choice(
             'Choose your Application environment?',
             ['production', 'local'],
@@ -139,23 +144,22 @@ class Install extends Command
         return true;
     }
 
-    public function setupAPIConfig()
+    public function setupAPIConfig(): bool
     {
-        $this->info('******** API Settings *******');
 
         if ($this->confirm('Do you wish to Change Default API Settings ?  ', false)) {
             $this->info('******** API Configuration ********');
 
-            $apiRateLimit = $this->ask('Please specify API Rate Limit ?');
+            $apiRateLimit = $this->ask('Enter value of API Rate Limit ');
             $this->modifyEnvFile('API_RATE_LIMIT=' . env('API_RATE_LIMIT'), 'API_RATE_LIMIT=' . $apiRateLimit);
 
-            $apiMaxAttempts = $this->ask('Please specify API Max Login Attempts ?');
+            $apiMaxAttempts = $this->ask('Enter value of  API Max Login Attempts ?');
             $this->modifyEnvFile('API_MAX_LOGIN_ATTEMPTS=' . env('API_MAX_LOGIN_ATTEMPTS'), 'API_MAX_LOGIN_ATTEMPTS=' . $apiMaxAttempts);
 
-            $apiMaxLoginDelay = $this->ask('Please specify API Max Login Deplay ?');
+            $apiMaxLoginDelay = $this->ask('Enter value of API Max Login Delay');
             $this->modifyEnvFile('API_MAX_LOGIN_DELAY=' . env('API_MAX_LOGIN_DELAY'), 'API_MAX_LOGIN_DELAY=' . $apiMaxLoginDelay);
 
-            $apiTokenExpire = $this->ask('Please specify API Token Expire?');
+            $apiTokenExpire = $this->ask('Enter value of API Token Expire?');
             $this->modifyEnvFile('API_TOKEN_EXPIRE=' . env('API_TOKEN_EXPIRE'), 'API_TOKEN_EXPIRE=' . $apiTokenExpire);
 
 
@@ -178,22 +182,20 @@ class Install extends Command
     public function setupDBConfig(): bool
     {
 
-        //Setup DB Configuration
-        $this->info('******** DB Configuration ********');
 
-        $dbName = $this->ask('Please specify DB Name ?');
+        $dbName = $this->ask('Enter Value of Database Name');
         $this->modifyEnvFile('DB_DATABASE=' . env('DB_DATABASE'), 'DB_DATABASE=' . $dbName);
 
 
-        $dbUsername = $this->ask('Please specify DB Username ?');
+        $dbUsername = $this->ask('Enter Value of Database Username ');
         $this->modifyEnvFile('DB_USERNAME=' . env('DB_USERNAME'), 'DB_USERNAME=' . $dbUsername);
 
 
-        if ($this->confirm('Do you like to set "empty" DB Password for localhost?', true)) {
+        if ($this->confirm('Do you like to set "empty" Database Password ? ', true)) {
             $this->modifyEnvFile('DB_PASSWORD=' . env('DB_PASSWORD'), 'DB_PASSWORD=');
 
         } else {
-            $dbPassword = $this->ask('Please specify DB Password ?');
+            $dbPassword = $this->ask('Enter Value of Database Password ');
             $this->modifyEnvFile('DB_PASSWORD=' . env('DB_PASSWORD'), 'DB_PASSWORD=' . $dbPassword);
 
         }
@@ -244,8 +246,6 @@ class Install extends Command
 
     public function appKeyGenerate(): bool
     {
-        $this->info('******** Secure App Key Generated *******');
-
 
         Artisan::call('key:generate', ['--force' => true]);
         echo Artisan::output();
