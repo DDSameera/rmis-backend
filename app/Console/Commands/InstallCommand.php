@@ -7,7 +7,7 @@ use File;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class Install extends Command
+class InstallCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -21,7 +21,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $description = 'Install RMIS';
+    protected $description = 'InstallCommand RMIS';
 
     /**
      * Create a new command instance.
