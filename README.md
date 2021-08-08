@@ -19,6 +19,9 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 ## 1.0.3. Server URL
 ### ``http://127.0.0.1:8000``
 
+## 1.0.4 How to Run Unit Test & Feature Test ? 
+Open Terminal & Run command ``php artisan test``
+
 
 ## 1.0.4. Setup Frontend Application
 ### https://github.com/DDSameera/rmis-frontend
