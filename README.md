@@ -8,11 +8,14 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 1. Run this Command to clone project
    `git clone https://github.com/DDSameera/rmis-backend.git` 
 2. Create New MYSQL Database "rmis"
-3. Open project in PHPStorm 
+
 
 
 ## 1.0.2. Installation 
- Open Terminal & Run command ``php artisan rmis:install`` 
+
+1. Go to Folder Eg: `rmis-backend`
+2. Install Dependencies . Run Command `composer install`
+2. Open Terminal & Run command ``php artisan rmis:install``
 
 <img alt="rmis_install" src="https://raw.githubusercontent.com/DDSameera/rmis-backend/master/public/assets/images/pa_rm_install.gif"/>
        
