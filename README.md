@@ -22,15 +22,14 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 ## 2.0 Getting Start
 
 ## 1. Basic Setup
-1. Open Windows Command Prompt 
-2. Go to WAMP Folder <code> cd  C:/wamp64/www </code>
-3. Run this Command to clone project
+1. Run this Command to clone project
    `git clone https://github.com/DDSameera/rmis-backend.git` 
-4. Open this project in PHPStorm 
-5. Create New MYSQL Database "rmis"
+2. Create New MYSQL Database "rmis"
+3. Open project in PHPStorm 
+
 
 ## 2. Installation 
-1. Open Terminal & Run command ``php artisan rmis:install``
+ Open Terminal & Run command ``php artisan rmis:install`` 
 
 <img alt="rmis_install" src="https://raw.githubusercontent.com/DDSameera/rmis-backend/master/public/assets/images/pa_rm_install.gif"/>
        
