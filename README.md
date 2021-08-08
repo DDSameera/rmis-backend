@@ -32,6 +32,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 ## 2. Installation 
 1. Open Terminal & Run command ``php artisan rmis:install``
 
+<img src="https://raw.githubusercontent.com/DDSameera/rmis-backend/master/public/assets/images/pa_rm_install.gif"/>
 
 
 
