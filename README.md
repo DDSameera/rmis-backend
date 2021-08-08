@@ -20,5 +20,5 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 ### ``http://127.0.0.1:8000``
 
 
-## 1.0.4. Frontend Application
+## 1.0.4. Setup Frontend Application
 ### https://github.com/DDSameera/rmis-frontend
