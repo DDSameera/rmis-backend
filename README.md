@@ -2,7 +2,7 @@
 
 RMIS stands for Recruitment Management Information System - Please follow up these steps  for testing in a fresh environment
 
-### 1.0 PreRequests
+## 1.0 PreRequests
 - ****PHP 8.0,MySQL 8.0,Apache 2.4****
 - WAMP Server Latest ([Download](https://www.wampserver.com/en/))
   or XAMPP Server Latest
@@ -12,7 +12,7 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 - Composer Latest Version ([Download](https://getcomposer.org/download/ ))
 - PHP Unit Test ([Installation Guide](https://perials.com/installing-phpunit-windows/))
 
-### Set Up Windows Environment Path Variable
+## Set Up Windows Environment Path Variable
 - Go to Start > Type "Edit Environment Variable for your account"
 - Add Following Paths 
     - `C:\wamp64\bin\php\php7.4.9`
@@ -21,34 +21,23 @@ RMIS stands for Recruitment Management Information System - Please follow up the
 
 ## 2.0 Getting Start
 
-### 1. Clone Project
-1) Open Windows Command Prompt 
-2) Go to WAMP Folder <code> cd  C:/wamp64/www </code>
-3) Run this Command to clone project
+## 1. Basic Setup
+1. Open Windows Command Prompt 
+2. Go to WAMP Folder <code> cd  C:/wamp64/www </code>
+3. Run this Command to clone project
    `git clone https://github.com/DDSameera/rmis-backend.git` 
-4) Open this project in PHPStorm 
+4. Open this project in PHPStorm 
+5. Create New MYSQL Database "rmis"
 
-### 2. Installation 
+## 2. Installation 
 1. Open Terminal & Run command ``php artisan rmis:install``
 
-#### Command line Installation Wizard
-``
-Enter Value of Database Name :
-rmis
-``
-<br/>
-``
-Enter Value of Database Username :
-root
-``
-<br/>
-``
-Do you like to set "empty" Database Password ?
-yes
-``
-<br/>
+
+
+
+
+
           
 ### 2. Preparation 
-1) Rename <code>.env.example</code> to <code>.env</code>
-2) Create MYSQL database  ``rmis-backend``
+
 

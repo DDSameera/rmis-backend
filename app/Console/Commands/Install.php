@@ -223,7 +223,6 @@ class Install extends Command
 
     public function optimize(): bool
     {
-        $this->info('******** Optimization Process *******');
 
         Artisan::call('config:cache');
         echo Artisan::output();
