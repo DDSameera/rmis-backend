@@ -28,7 +28,6 @@ class ExcelFileRequest extends FormRequest
     public function rules()
     {
         return [
-
             'excel_file' => ['required',new ValidateCSVFile()]
         ];
     }

@@ -26,7 +26,7 @@ class ValidateCSVFile implements Rule
     public function passes($attribute, $value)
     {
 
-        return ($value->getClientMimeType() === "text/csv" && $value->getClientOriginalExtension()=== "csv");
+        return ($value->getClientOriginalExtension()=== "csv");
     }
 
     /**
@@ -36,6 +36,6 @@ class ValidateCSVFile implements Rule
      */
     public function message()
     {
-        return 'Please upload only  excel sheet (.csv)';
+        return 'Invalid File Format. Allow Only .csv format';
     }
 }
