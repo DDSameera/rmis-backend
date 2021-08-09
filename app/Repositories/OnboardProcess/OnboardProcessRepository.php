@@ -90,23 +90,35 @@ class OnboardProcessRepository implements OnboardProcessInterface
     }
 
 
+    /**
+     * @throws \Exception
+     */
     public function getWeeklyBasedPercentage(array $data): array
     {
 
+
+        //Result Array Initialization
         $result = [];
 
+        //Next Week Date Initialization
         $nextWeekDate = null;
+
+        //Week Number Initialization
         $weekNumber = -1;
 
+        //Loop Excel
         foreach ($data as $key => $d) {
 
+            //Extract Data
             $id = $d['id'];
             $createdAt = $d['createdAt'];
             $percentage = $d['percentage'];
 
 
+            //Check, CreatedAt date greater than next week date or check nexweekdate is empty or not
             if ($nextWeekDate === null || (new DateTime($createdAt)) >= $nextWeekDate) {
 
+                //Calculate Next week Date
                 $nextWeekDate = new DateTime($createdAt);
                 $nextWeekDate->modify('+7 day');
                 $weekNumber++;
@@ -114,7 +126,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
 
             }
 
-
+            //Check Current Percentage value include in Step Percentages
             if (in_array($percentage, $this->stepPercentages)) {
                 $result[$weekNumber][] = $percentage;
             }
@@ -126,9 +138,8 @@ class OnboardProcessRepository implements OnboardProcessInterface
 
     public function getChartCodes(array $userDataArr): array
     {
-        $dataWeek = $this->getWeeklyBasedPercentage($userDataArr);
-
-        $data = $this->calculateStepsPercentage($dataWeek);
+        $weeklyBasedPercentage = $this->getWeeklyBasedPercentage($userDataArr);
+        $data = $this->calculateStepsPercentage($weeklyBasedPercentage);
 
 
         $result = [];
