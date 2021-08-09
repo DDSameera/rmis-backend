@@ -7,15 +7,9 @@ namespace App\Traits;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Console\Output\ConsoleOutput;
-
+use File;
 trait InstallationTrait
 {
-    public function runComposerCommands(): bool
-    {
-
-        shell_exec('composer install');
-        return true;
-    }
 
     public function runServer(): bool
     {

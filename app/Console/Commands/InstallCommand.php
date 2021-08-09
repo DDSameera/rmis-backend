@@ -75,21 +75,19 @@ class InstallCommand extends Command
         $this->appKeyGenerate();
 
 
-        //7.Run Composer Commands
-        $this->info('******** Composer Command Run [7/10]*******');
-        $this->runComposerCommands();
 
-        //8.Optimize
+
+        //7.Optimize
         $this->info('******** Optimization Process [8/10] *******');
         $this->optimize();
 
 
-        //9.DB Migration & Seed
+        //8.DB Migration & Seed
         $this->info('******** DB Migration & Seed Run [9/10]*******');
         $this->runDBMigration();
 
 
-        //10.Run Server
+        //9.Run Server
         $this->info('******** All Process Completed [10/10] .Server is running *******');
         $this->runServer();
 
