@@ -51,6 +51,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
     public function calculateStepsPercentage(array $data): array
     {
 
+        //Initialize Result Array
         $result = [];
 
         foreach ($data as $key => $value) {
@@ -68,12 +69,12 @@ class OnboardProcessRepository implements OnboardProcessInterface
                     if (isset( $totalPercentage[$sp])) {
 
                         //Percentage Amount Calculation
-                        $percentageAmount = ( $totalPercentage[$sp] * 100) / count($value);
+                        $percentageAmount = ($totalPercentage[$sp] * 100) / count($value);
 
                         //Assign to Result Array
                         $result[$key][] = round(($percentageAmount));
                     } else {
-                        //If sp value is not exsist ,assign Zero
+                        //If sp value is not exist ,assign Zero
                         $result[$key][] = 0;
                     }
                 }
@@ -82,6 +83,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
                 $result[$key][0] = 100;
             }
         }
+
 
         return $result;
     }
