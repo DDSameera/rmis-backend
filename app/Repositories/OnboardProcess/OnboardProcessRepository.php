@@ -69,7 +69,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
                     if (isset($totalPercentage[$sp])) {
 
                         //Percentage Amount Calculation
-                        $percentageAmount = ($totalPercentage[$sp] * 100) / count($value);
+                        $percentageAmount = ($totalPercentage[$sp] / count($value)) * 100;
 
                         //Round up percentage value and Assign it to Result Array
                         $result[$key][] = round(($percentageAmount));
