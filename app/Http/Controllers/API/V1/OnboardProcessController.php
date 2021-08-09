@@ -35,11 +35,6 @@ class OnboardProcessController extends Controller
         //Format Raw Excel Data
         $formattedExcelSheetDataArr = $this->onboardProcess->getFormattedExcelData($excelSheetData);
 
-        //Generate Stats based up on week days
-        $data = $this->onboardProcess->getWeeklyBasedPercentage($formattedExcelSheetDataArr);
-
-        //Calculate Percentage of Steps
-        $data = $this->onboardProcess->calculateStepsPercentage($formattedExcelSheetDataArr);
 
         //Get JSON Chart Stats
         $result = $this->onboardProcess->getChartCodes($formattedExcelSheetDataArr);

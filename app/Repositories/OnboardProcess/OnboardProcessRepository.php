@@ -50,7 +50,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
 
     public function calculateStepsPercentage(array $data): array
     {
-
+      
         $result = [];
 
         foreach ($data as $key => $value) {
@@ -77,7 +77,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
         $result = [];
 
         $nextWeekDate = null;
-        $weekNo = -1;
+        $weekNumber = -1;
 
         foreach ($data as $key => $d) {
 
@@ -90,13 +90,14 @@ class OnboardProcessRepository implements OnboardProcessInterface
 
                 $nextWeekDate = new DateTime($createdAt);
                 $nextWeekDate->modify('+7 day');
-                $weekNo++;
+                $weekNumber++;
+
 
             }
 
 
             if (in_array($percentage, $this->percentages)) {
-                $result[$weekNo][] = $percentage;
+                $result[$weekNumber][] = $percentage;
             }
         }
 
