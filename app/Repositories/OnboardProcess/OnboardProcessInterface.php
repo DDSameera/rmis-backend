@@ -13,9 +13,9 @@ interface OnboardProcessInterface
 
     public function getChartCodes(array $userDataArr);
 
-    public function findStepsPercentage(array $data): array;
+    public function calculateStepsPercentage(array $data): array;
 
-    public function divideByWeek(array $data): array;
+    public function getWeeklyBasedPercentage(array $data): array;
 
 
 }

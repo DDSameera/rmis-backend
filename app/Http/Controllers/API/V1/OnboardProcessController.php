@@ -36,15 +36,15 @@ class OnboardProcessController extends Controller
         $formattedExcelSheetDataArr = $this->onboardProcess->getFormattedExcelData($excelSheetData);
 
         //Generate Stats based up on week days
-        $data = $this->onboardProcess->divideByWeek($formattedExcelSheetDataArr);
+        $data = $this->onboardProcess->getWeeklyBasedPercentage($formattedExcelSheetDataArr);
 
         //Calculate Percentage of Steps
-        $data = $this->onboardProcess->findStepsPercentage($formattedExcelSheetDataArr);
+        $data = $this->onboardProcess->calculateStepsPercentage($formattedExcelSheetDataArr);
 
         //Get JSON Chart Stats
         $result = $this->onboardProcess->getChartCodes($formattedExcelSheetDataArr);
 
-        //  Send Response with Formatted User Data
+        // Send Response with Formatted User Data
         return SendResponseTrait::sendSuccessWithToken($result, "Highchart Data", Response::HTTP_OK);
 
 

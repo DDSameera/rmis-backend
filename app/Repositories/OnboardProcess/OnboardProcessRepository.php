@@ -7,7 +7,7 @@ use DateTime;
 class OnboardProcessRepository implements OnboardProcessInterface
 {
 
-    private $steps = [0, 20, 40, 50, 70, 90, 99, 100];
+    private $percentages = [0, 20, 40, 50, 70, 90, 99, 100];
 
 
     public function storeSheet($excelFile)
@@ -48,7 +48,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
     }
 
 
-    public function findStepsPercentage(array $data): array
+    public function calculateStepsPercentage(array $data): array
     {
 
         $result = [];
@@ -56,9 +56,9 @@ class OnboardProcessRepository implements OnboardProcessInterface
         foreach ($data as $key => $value) {
             if (!empty($value)) {
                 $values = array_count_values($value);
-                foreach ($this->steps as $step) {
-                    if (isset($values[$step])) {
-                        $result[$key][] = round(($values[$step] * 100) / count($value));
+                foreach ($this->percentages as $p) {
+                    if (isset($values[$p])) {
+                        $result[$key][] = round(($values[$p] * 100) / count($value));
                     } else {
                         $result[$key][] = 0;
                     }
@@ -71,13 +71,13 @@ class OnboardProcessRepository implements OnboardProcessInterface
     }
 
 
-    public function divideByWeek(array $data): array
+    public function getWeeklyBasedPercentage(array $data): array
     {
 
         $result = [];
 
-        $nextWeekDay = null;
-        $weekNumber = -1;
+        $nextWeekDate = null;
+        $weekNo = -1;
 
         foreach ($data as $key => $d) {
 
@@ -86,18 +86,17 @@ class OnboardProcessRepository implements OnboardProcessInterface
             $percentage = $d['percentage'];
 
 
-            if ($nextWeekDay === null || (new DateTime($createdAt)) >= $nextWeekDay) {
+            if ($nextWeekDate === null || (new DateTime($createdAt)) >= $nextWeekDate) {
 
-                $nextWeekDay = new DateTime($createdAt);
-                $nextWeekDay->modify('+7 day');
-                $weekNumber++;
-
+                $nextWeekDate = new DateTime($createdAt);
+                $nextWeekDate->modify('+7 day');
+                $weekNo++;
 
             }
 
 
-            if (in_array($percentage, $this->steps)) {
-                $result[$weekNumber][] = $percentage;
+            if (in_array($percentage, $this->percentages)) {
+                $result[$weekNo][] = $percentage;
             }
         }
 
@@ -105,11 +104,11 @@ class OnboardProcessRepository implements OnboardProcessInterface
         return $result;
     }
 
-    public function getChartCodes(array $userDataArr)
+    public function getChartCodes(array $userDataArr): array
     {
-        $dataWeek = $this->divideByWeek($userDataArr);
+        $dataWeek = $this->getWeeklyBasedPercentage($userDataArr);
 
-        $data = $this->findStepsPercentage($dataWeek);
+        $data = $this->calculateStepsPercentage($dataWeek);
 
 
         $result = [];
