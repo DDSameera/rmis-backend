@@ -7,7 +7,7 @@ use DateTime;
 class OnboardProcessRepository implements OnboardProcessInterface
 {
 
-    private $stepPercentages = [0, 20, 40, 50, 70, 90, 99, 100];
+    private array $stepPercentages = [0, 20, 40, 50, 70, 90, 99, 100];
 
 
     public function storeSheet($excelFile)
@@ -71,15 +71,16 @@ class OnboardProcessRepository implements OnboardProcessInterface
                         //Percentage Amount Calculation
                         $percentageAmount = ($totalPercentage[$sp] * 100) / count($value);
 
-                        //Assign to Result Array
+                        //Round up percentage value and Assign it to Result Array
                         $result[$key][] = round(($percentageAmount));
+
                     } else {
                         //If sp value is not exist ,assign Zero
                         $result[$key][] = 0;
                     }
                 }
 
-                //Every 0 value should be 100
+                //Every 0 value should be 100 - (Chart x value should be) ,
                 $result[$key][0] = 100;
             }
         }
