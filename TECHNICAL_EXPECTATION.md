@@ -31,9 +31,9 @@ ____
 
 
 # SKIP POINTS
-- Unit Testing  (Reason : Limited Time,But I  Completed Feature Testing)
-- SWAGGER API Documentation Generate (Reason : Limited Time)
-- Dockerized (Reason : Limited Time)
+- Vue JS Frontend
+- Use Vanilla PHP on backend
+- Dockerize
 ___
 
 # HOW TO RUN FEATURE TESTING ?
@@ -41,6 +41,9 @@ ___
 - Refer test Cases `/tests/Feature folder`
 
 ___
+
+# FUTURE ENHANCEMENTS
+- Swagger API Documentation
 
 # Debugging,Loggins
 ___
