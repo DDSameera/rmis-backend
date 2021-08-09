@@ -61,12 +61,12 @@ class OnboardProcessRepository implements OnboardProcessInterface
                 //Get Total Count of User Percentages
                 $totalPercentage = array_count_values($value);
 
+
                 //Loop Step Percentages
                 foreach ($this->stepPercentages as $sp) {
 
-
                     //Check Percentage value already exist in percentage array
-                    if (isset( $totalPercentage[$sp])) {
+                    if (isset($totalPercentage[$sp])) {
 
                         //Percentage Amount Calculation
                         $percentageAmount = ($totalPercentage[$sp] * 100) / count($value);
