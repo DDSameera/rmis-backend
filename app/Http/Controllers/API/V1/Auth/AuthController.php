@@ -8,7 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\User\UserRepositoryInterface;
-use App\Traits\Privilege;
+use App\Traits\PrivilegeTrait;
 use App\Traits\SendResponseTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class AuthController extends Controller
 
 {
 
-    use SendResponseTrait, Privilege;
+    use SendResponseTrait, PrivilegeTrait;
 
     private UserRepositoryInterface $userRepository;
 
