@@ -7,7 +7,7 @@ use DateTime;
 class OnboardProcessRepository implements OnboardProcessInterface
 {
 
-    private $percentages = [0, 20, 40, 50, 70, 90, 99, 100];
+    private $stepPercentages = [0, 20, 40, 50, 70, 90, 99, 100];
 
 
     public function storeSheet($excelFile)
@@ -50,19 +50,35 @@ class OnboardProcessRepository implements OnboardProcessInterface
 
     public function calculateStepsPercentage(array $data): array
     {
-      
+
         $result = [];
 
         foreach ($data as $key => $value) {
+
             if (!empty($value)) {
-                $values = array_count_values($value);
-                foreach ($this->percentages as $p) {
-                    if (isset($values[$p])) {
-                        $result[$key][] = round(($values[$p] * 100) / count($value));
+
+                //Get Total Count of User Percentages
+                $totalPercentage = array_count_values($value);
+
+                //Loop Step Percentages
+                foreach ($this->stepPercentages as $sp) {
+
+
+                    //Check Percentage value already exist in percentage array
+                    if (isset( $totalPercentage[$sp])) {
+
+                        //Percentage Amount Calculation
+                        $percentageAmount = ( $totalPercentage[$sp] * 100) / count($value);
+
+                        //Assign to Result Array
+                        $result[$key][] = round(($percentageAmount));
                     } else {
+                        //If sp value is not exsist ,assign Zero
                         $result[$key][] = 0;
                     }
                 }
+
+                //Every 0 value should be 100
                 $result[$key][0] = 100;
             }
         }
@@ -96,7 +112,7 @@ class OnboardProcessRepository implements OnboardProcessInterface
             }
 
 
-            if (in_array($percentage, $this->percentages)) {
+            if (in_array($percentage, $this->stepPercentages)) {
                 $result[$weekNumber][] = $percentage;
             }
         }
